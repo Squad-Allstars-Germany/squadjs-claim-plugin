@@ -14,7 +14,7 @@ export default class Claim extends BasePlugin {
             commandPrefix: {
                 required: false,
                 description: 'List of prefixes for the claim command',
-                default: ['claim', 'claims', 'cl', 'vc' ],
+                default: ["claim", "claims", "cl", "vc"],
             },
             onlySquadLeader: {
                 required: false,
