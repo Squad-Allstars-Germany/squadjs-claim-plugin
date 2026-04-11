@@ -204,7 +204,7 @@ export default class Claim extends BasePlugin {
         if (squadIDs.some(s => isNaN(s))) {
             this.server.rcon.warn(
                 info.steamID,
-                'Invalid squad ID provided. \nFor help use -> !' + prefixList + ' help'
+                'Invalid squad ID provided. \nFor help use -> !' + prefixList
             );
             return;
         }
@@ -213,7 +213,7 @@ export default class Claim extends BasePlugin {
         if (squadIDs.length <= 1) {
             this.server.rcon.warn(
                 info.steamID,
-                'Please provide at least two squad IDs. \nFor help use -> !' + prefixList + ' help'
+                'Please provide at least two squad IDs. \nFor help use -> !' + prefixList
             );
             return;
         }
