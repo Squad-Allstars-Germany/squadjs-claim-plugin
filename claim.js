@@ -119,7 +119,7 @@ export default class Claim extends BasePlugin {
         const now = Date.now();
         const steamID = info.steamID;
 
-        const prefixList = this.options.commandPrefix.join(', !');
+        const prefix = '!' + this.options.commandPrefix[0];
 
         // Cooldown based on user role
         const cooldownSeconds = isAdmin
@@ -135,7 +135,7 @@ export default class Claim extends BasePlugin {
                 const remainingSec = Math.ceil((cooldownMs - diff) / 1000);
                 this.server.rcon.warn(
                     steamID,
-                    `Please wait ${remainingSec}s before using !${prefixList} again.`
+                    `Please wait ${remainingSec}s before using ${prefix} again.`
                 );
                 return;
             }
@@ -184,7 +184,7 @@ export default class Claim extends BasePlugin {
             if (!isAdmin) {
                 this.server.rcon.warn(
                     info.steamID,
-                    'Only admins can check squads of other teams. \nFor help use -> !' + prefixList
+                    'Only admins can check squads of other teams. \nFor help use -> ' + prefix + ' help'
                 );
                 return;
             }
@@ -204,7 +204,7 @@ export default class Claim extends BasePlugin {
         if (squadIDs.some(s => isNaN(s))) {
             this.server.rcon.warn(
                 info.steamID,
-                'Invalid squad ID provided. \nFor help use -> !' + prefixList
+                'Invalid squad ID provided. \nFor help use -> ' + prefix + ' help'
             );
             return;
         }
@@ -213,7 +213,7 @@ export default class Claim extends BasePlugin {
         if (squadIDs.length <= 1) {
             this.server.rcon.warn(
                 info.steamID,
-                'Please provide at least two squad IDs. \nFor help use -> !' + prefixList
+                'Please provide at least two squad IDs. \nFor help use -> ' + prefix + ' help'
             );
             return;
         }
@@ -312,19 +312,19 @@ export default class Claim extends BasePlugin {
         );
     }
 
-    getCommandPrefixString() {
-        return '!' + this.options.commandPrefix.join(', ');
+    getFirstCommandPrefixString() {
+        return '!' + this.options.commandPrefix[0];
     }
 
     getHelpMessageForPlayer() {
-        const prefix = this.getCommandPrefixString();
+        const prefix = this.getFirstCommandPrefixString();
         return [
             prefix + ' id1 id2 [id3 ...] - compare X squads',
         ].join('\n \n');
     }
 
     getHelpMessageExamplesForPlayer() {
-        const prefix = this.getCommandPrefixString();
+        const prefix = this.getFirstCommandPrefixString();
         return [
             'Examples:',
             prefix + ' 1 3',
@@ -334,7 +334,7 @@ export default class Claim extends BasePlugin {
     }
 
     getHelpMessageForAdmin() {
-        const prefix = this.getCommandPrefixString();
+        const prefix = this.getFirstCommandPrefixString();
         return [
             prefix + ' id1 id2 [id3 ...] - compare X squads',
             prefix + ' team id1 id2 [id3 ...] - compare X squads of a team',
@@ -343,7 +343,7 @@ export default class Claim extends BasePlugin {
     }
 
     getHelpMessageExamplesForAdmin() {
-        const prefix = this.getCommandPrefixString();
+        const prefix = this.getFirstCommandPrefixString();
         return [
             'Examples:',
             prefix + ' 1 3',
