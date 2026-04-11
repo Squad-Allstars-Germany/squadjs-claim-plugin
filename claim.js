@@ -119,7 +119,7 @@ export default class Claim extends BasePlugin {
         const now = Date.now();
         const steamID = info.steamID;
 
-        const prefix = '!' + this.options.commandPrefix[0];
+        const prefix = this.getFirstCommandPrefixString();
 
         // Cooldown based on user role
         const cooldownSeconds = isAdmin
