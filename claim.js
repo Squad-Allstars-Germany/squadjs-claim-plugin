@@ -119,7 +119,7 @@ export default class Claim extends BasePlugin {
         const now = Date.now();
         const steamID = info.steamID;
 
-        const prefixList = this.options.commandPrefix.join(', ');
+        const prefixList = this.options.commandPrefix.join((', !');
 
         // Cooldown based on user role
         const cooldownSeconds = isAdmin
@@ -184,7 +184,7 @@ export default class Claim extends BasePlugin {
             if (!isAdmin) {
                 this.server.rcon.warn(
                     info.steamID,
-                    'Only admins can check squads of other teams. \nFor help use -> !' + prefixList + ' help'
+                    'Only admins can check squads of other teams. \nFor help use -> !' + prefixList
                 );
                 return;
             }
